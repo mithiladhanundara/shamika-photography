@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* This is the correct combination of Tailwind's rules and your custom styles */
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-light);
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.7; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: var(--text-dark);
+}
+
+.text-accent { color: var(--accent-sage); }
+
+.btn-primary {
+    background-color: var(--text-dark);
+    color: #ffffff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.btn-primary:hover {
+    background-color: #4a433e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+}
+
+.btn-accent {
+    background-color: var(--accent-terracotta);
+    color: #ffffff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(226, 114, 91, 0.2);
+}
+.btn-accent:hover {
+    background-color: #d16550;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(226, 114, 91, 0.3);
+}
+
+.nav-link {
+    position: relative;
+    font-weight: 500;
+}
+header .nav-link {
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 50%;
+    background-color: var(--accent-sage);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2px;
+}
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.gallery-item, .instagram-item {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.group:hover .gallery-item, .group:hover .instagram-item {
+    transform: scale(1.08);
+}
+
+.form-input {
+     background-color: var(--bg-secondary);
+     border: 1px solid var(--border-color);
+     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.form-input:focus {
+    outline: none;
+    border-color: var(--accent-sage);
+    box-shadow: 0 0 0 3px rgba(157, 172, 140, 0.2);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+.animate-scroll {
+    animation: scroll 60s linear infinite;
+}
+.pause-on-hover:hover .animate-scroll {
+    animation-play-state: paused;
+}
+
+.shadow-soft-lg {
+     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+}
+
+header#main-header {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+header#main-header:not(.scrolled) {
+    background-color: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(5px);
+}
+header#main-header.scrolled.pill-nav {
+    background-color: rgba(100, 100, 100, 0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 960px;
+    border-radius: 9999px;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+header#main-header .header-logo img {
+    filter: brightness(0) invert(1);
+}
+
+.testimonial-slide {
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}

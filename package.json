@@ -10,10 +10,7 @@
     "tailwind-init": "tailwindcss init -p --ts"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@vercel/kv": "^3.0.0",
-=======
->>>>>>> 7b26177c17c569e716ed3729973e94faf7210b97
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0"

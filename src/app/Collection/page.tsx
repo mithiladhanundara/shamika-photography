@@ -5,10 +5,17 @@ import AlbumCard from '@/components/AlbumCard';
 
 // In the future, you can fetch this data from a database or CMS
 const albums = [
+<<<<<<< HEAD
   { id: '1', imageUrl: 'https://ik.imagekit.io/qetpsnccs/Photography%20/511810023_1151898833621504_4387065176975695224_n.jpg?updatedAt=1758635153892', category: 'Wedding Shoot', title: 'Nimesh & Tharushi' },
   { id: '2', imageUrl: 'https://ik.imagekit.io/qetpsnccs/Photography%20/515505375_1194711846006869_6267829151681991070_n.jpg?updatedAt=1758635153895', category: 'Casual Shoot', title: 'Anu & Pasan' },
   { id: '3', imageUrl: 'https://ik.imagekit.io/qetpsnccs/Photography%20/506501075_1148749027269818_2327372743912024678_n.jpg?updatedAt=1758635153826', category: 'Wedding Shoot', title: 'Sandun & Gayani' },
   { id: '4', imageUrl: 'https://ik.imagekit.io/qetpsnccs/Photography%20/537823676_1198696022275118_2701097015137960603_n.jpg?updatedAt=1758635153784', category: 'Engagement Shoot', title: 'Kavindya & Uthishka' },
+=======
+  { imageUrl: 'https://ik.imagekit.io/qetpsnccs/Photography%20/511810023_1151898833621504_4387065176975695224_n.jpg?updatedAt=1758635153892', category: 'Wedding Shoot', title: 'Nimesh & Tharushi' },
+  { imageUrl: 'https://ik.imagekit.io/qetpsnccs/Photography%20/515505375_1194711846006869_6267829151681991070_n.jpg?updatedAt=1758635153895', category: 'Casual Shoot', title: 'Anu & Pasan' },
+  { imageUrl: 'https://ik.imagekit.io/qetpsnccs/Photography%20/506501075_1148749027269818_2327372743912024678_n.jpg?updatedAt=1758635153826', category: 'Wedding Shoot', title: 'Sandun & Gayani' },
+  { imageUrl: 'https://ik.imagekit.io/qetpsnccs/Photography%20/537823676_1198696022275118_2701097015137960603_n.jpg?updatedAt=1758635153784', category: 'Engagement Shoot', title: 'Kavindya & Uthishka' },
+>>>>>>> 7b26177c17c569e716ed3729973e94faf7210b97
   // Add more albums here
 ];
 
@@ -47,7 +54,10 @@ export default function CollectionPage() {
                 imageUrl={album.imageUrl}
                 category={album.category}
                 title={album.title}
+<<<<<<< HEAD
                 id={album.id}
+=======
+>>>>>>> 7b26177c17c569e716ed3729973e94faf7210b97
               />
             ))}
           </div>

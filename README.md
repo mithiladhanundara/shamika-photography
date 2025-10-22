@@ -1,5 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Shamika Photography Website
+
+A beautiful photography portfolio website built with Next.js, featuring:
+- Dynamic album galleries
+- Admin panel for content management
+- Responsive design with Tailwind CSS
+- Image optimization with Next.js Image component
+- Database integration with Vercel KV
+
+**Live Demo:** https://shamika-photography.vercel.app
+
 ## Getting Started
 
 First, run the development server:

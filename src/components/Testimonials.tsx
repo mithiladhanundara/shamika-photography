@@ -1,16 +1,41 @@
 // src/components/Testimonials.tsx
 'use client'; // Required for interactivity
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const testimonials = [
+// Fallback testimonials in case API fails
+const fallbackTestimonials = [
   { quote: "We are highly satisfied with your excellent photography. The photos are unique and mesmerizing, and we've fallen in love with our pre-shoot photos all over again.", author: "NIRANGA & THAMALI" },
   { quote: "Absolutely stunning work! You captured the essence of our day perfectly. Every photo tells a story and brings back the happiest memories. Thank you so much!", author: "SARAH & JAMES" },
   { quote: "The most professional and friendly photographer we could have asked for. The entire process was a joy, and the final photos exceeded all of our expectations.", author: "PRIYA & ANURA" },
 ];
 
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState(fallbackTestimonials);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch testimonials from API
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await fetch('/api/reviews');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.length > 0) {
+            setTestimonials(data);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch testimonials:', error);
+        // Keep fallback testimonials
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
 
   const prev = () => setCurrentSlide((current) => (current === 0 ? testimonials.length - 1 : current - 1));
   const next = () => setCurrentSlide((current) => (current === testimonials.length - 1 ? 0 : current + 1));

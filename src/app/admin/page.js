@@ -118,6 +118,40 @@ export default async function AdminDashboard() {
       </header>
 
       <main style={{ marginTop: '2rem' }}>
+        {/* Quick Actions */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '1rem',
+          marginBottom: '2rem'
+        }}>
+          <Link href="/admin/add" style={{
+            padding: '1rem',
+            background: '#1a1a1a',
+            color: 'white',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            textAlign: 'center',
+            border: '1px solid #333'
+          }}>
+            <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem' }}>Albums</h3>
+            <p style={{ margin: 0, color: '#999', fontSize: '0.9rem' }}>Manage photo albums</p>
+          </Link>
+          
+          <Link href="/admin/reviews" style={{
+            padding: '1rem',
+            background: '#1a1a1a',
+            color: 'white',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            textAlign: 'center',
+            border: '1px solid #333'
+          }}>
+            <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem' }}>Reviews</h3>
+            <p style={{ margin: 0, color: '#999', fontSize: '0.9rem' }}>Manage client testimonials</p>
+          </Link>
+        </div>
+
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',

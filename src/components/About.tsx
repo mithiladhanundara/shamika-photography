@@ -8,7 +8,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
         <div className="text-center lg:text-left">
           <h3 className="text-sm uppercase tracking-widest text-accent-sage mb-2 font-semibold">A Little About Me</h3>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Hello, I'm Shamika Thirankana</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Hello, I'm Shamika Thiranjana</h2>
           <p className="mb-8 text-base md:text-lg leading-relaxed">I'm a passionate photographer based in Sri Lanka, specializing in capturing love stories. My style is a superlative combination of love, nature, and raw emotion, and I strive to infuse beauty into everything I see.</p>
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 mb-10">
             <div className="text-center">

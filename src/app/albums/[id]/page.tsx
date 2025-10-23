@@ -26,8 +26,8 @@ async function getAlbum(id: string) {
 }
 
 // This is the page component
-export default async function AlbumDetailsPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function AlbumDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const album = await getAlbum(id);
 
   if (!album) {

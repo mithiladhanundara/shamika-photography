@@ -13,6 +13,13 @@ interface Album {
   createdAt: number;
 }
 
+interface SampleAlbum {
+  id: string;
+  imageUrl: string;
+  category: string;
+  title: string;
+}
+
 // This function fetches ALL albums from database
 async function getAllAlbums() {
   try {
@@ -24,7 +31,7 @@ async function getAllAlbums() {
     }
 
     // Fetch all album data in parallel
-    const albums = await kv.mget(...albumKeys);
+    const albums = await kv.mget(...albumKeys) as Album[];
     
     // Sort albums by creation date, newest first
     const sortedAlbums = albums.sort((a, b) => b.createdAt - a.createdAt);
@@ -37,7 +44,7 @@ async function getAllAlbums() {
 }
 
 // Sample albums data (fallback when no database albums exist)
-const sampleAlbums = [
+const sampleAlbums: SampleAlbum[] = [
   { id: '1', imageUrl: 'https://ik.imagekit.io/qetpsnccs/Photography%20/511810023_1151898833621504_4387065176975695224_n.jpg?updatedAt=1758635153892', category: 'Wedding Shoot', title: 'Nimesh & Tharushi' },
   { id: '2', imageUrl: 'https://ik.imagekit.io/qetpsnccs/Photography%20/515505375_1194711846006869_6267829151681991070_n.jpg?updatedAt=1758635153895', category: 'Casual Shoot', title: 'Anu & Pasan' },
   { id: '3', imageUrl: 'https://ik.imagekit.io/qetpsnccs/Photography%20/506501075_1148749027269818_2327372743912024678_n.jpg?updatedAt=1758635153826', category: 'Wedding Shoot', title: 'Sandun & Gayani' },
@@ -66,15 +73,19 @@ export default async function AlbumsPage() {
           {/* Album Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {albums.length > 0 ? (
-              albums.map((album, index) => (
-                <AlbumCard
-                  key={album.id || index}
-                  imageUrl={album.coverImage || album.imageUrl}
-                  category={album.category || "Photography"}
-                  title={album.title}
-                  id={album.id}
-                />
-              ))
+              albums.map((album, index) => {
+                // Type guard to check if it's a database album or sample album
+                const isDbAlbum = 'coverImage' in album;
+                return (
+                  <AlbumCard
+                    key={album.id || index}
+                    imageUrl={isDbAlbum ? album.coverImage : album.imageUrl}
+                    category={isDbAlbum ? "Photography" : album.category}
+                    title={album.title}
+                    id={album.id}
+                  />
+                );
+              })
             ) : (
               <div className="col-span-full text-center py-12">
                 <h2 className="text-2xl font-bold text-text-dark mb-4">No albums yet</h2>

@@ -1,27 +1,51 @@
-import { kv } from '@vercel/kv';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
+// Import KV with error handling
+let kv;
+try {
+  const { kv: kvImport } = await import('@vercel/kv');
+  kv = kvImport;
+} catch (error) {
+  console.warn('Vercel KV not available:', error.message);
+  kv = null;
+}
+
 // Helper function to check admin authentication
 async function isAuthenticated() {
-  const cookieStore = cookies(); // <-- FIX: Line 1
-  const sessionId = cookieStore.get('session_id')?.value; // <-- FIX: Line 2
-  if (!sessionId) {
-    return false; // No session cookie
-  }
+  try {
+    if (!kv) {
+      console.warn('KV not available, skipping authentication');
+      return false;
+    }
+    
+    const cookieStore = cookies();
+    const sessionId = cookieStore.get('session_id')?.value;
+    if (!sessionId) {
+      return false; // No session cookie
+    }
 
-  const adminUser = await kv.get(sessionId);
-  if (adminUser === 'admin') {
-    return true; // Session is valid
-  }
+    const adminUser = await kv.get(sessionId);
+    if (adminUser === 'admin') {
+      return true; // Session is valid
+    }
 
-  return false; // Session is invalid or expired
+    return false; // Session is invalid or expired
+  } catch (error) {
+    console.error('Authentication error:', error);
+    return false; // Return false on any error
+  }
 }
 
 // Helper function to fetch albums (we'll reuse the API logic directly)
 async function getAlbums() {
   try {
+    if (!kv) {
+      console.warn('KV not available, returning empty albums');
+      return [];
+    }
+    
     const albumKeys = await kv.keys('album:*');
     if (albumKeys.length === 0) return [];
 
@@ -37,15 +61,15 @@ async function getAlbums() {
   }
 }
 
+// Server action for logout
+async function logout() {
+  'use server';
+  cookies().delete('session_id'); // Delete the session cookie
+  redirect('/admin/login'); // Redirect to login
+}
+
 // Simple component to display a "Logout" button
 function LogoutButton() {
-  // This needs to be a form action to securely clear the server-side cookie
-  const logout = async () => {
-    'use server';
-    cookies().delete('session_id'); // Delete the session cookie
-    redirect('/admin/login'); // Redirect to login
-  };
-
   return (
     <form action={logout}>
       <button type="submit" style={{
@@ -135,11 +159,6 @@ export default async function AdminDashboard() {
                     width: '100%',
                     height: '150px',
                     objectFit: 'cover'
-                  }}
-                  onError={(e) => {
-                    // Optional: Handle image loading errors, e.g., show a placeholder
-                    console.error(`Failed to load image: ${album.coverImage}`);
-                    // e.target.src = '/placeholder-image.png'; // Example placeholder
                   }}
                 />
                 <div style={{ padding: '1rem' }}>
